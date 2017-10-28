@@ -1,0 +1,38 @@
+<h2>
+  <span>All Users</span>
+  <span class="right"><%= link_to 'Add New User', new_user_path, remote: true, class: 'btn btn-primary text-right' %></span>
+</h2>
+<% if @users.present? %>
+	<table class="table table-striped">
+		<thead>
+			<th>Name</th>
+			<th>Mobile</th>
+			<th>Email</th>
+		  <th>Created At</th>
+      <th>Actions</th>
+		</thead>
+		<tbody>
+			<% @users.each do |user| %>
+        <tr>
+        	<td><%= user.name %></td>
+        	<td><%= user.mobile %></td>
+        	<td><%= user.email %></td>
+        	<td><%= user.created_at %></td>
+        	<td>
+        		<%= link_to 'Edit', edit_user_path(user), remote: true %> |
+        		<%= link_to 'Delete', user_path(user), method: 'delete', data: {confirm: 'Are you sure?'} %>
+        	</td>
+        </tr>
+      <% end %>
+		</tbody>
+	</table>
+<% else %>
+  <div>There are no users</div>
+<% end %>
+<div id='userEditDiv'></div>
+
+<style type="text/css">
+	h2 span.right {
+		float: right;
+	}
+</style>
